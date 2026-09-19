@@ -30,10 +30,6 @@ This project uses historical **PM2.5 concentrations** and weather conditions to 
 
 The predictions are then converted into familiar **AQI categories**, making the results easier to understand for people who do not have a technical background.
 
-### The goal
-
-**Turn environmental data into predictions, and predictions into information people can actually use.**
-
 ---
 
 ## Live Website
