@@ -1,0 +1,34 @@
+{
+  "city": "Lahore",
+  "last_updated": "2026-10-31T10:31:42.701491+05:00",
+  "next_update": "2026-11-03T10:31:42.701491+05:00",
+  "forecasts": [
+    {
+      "date": "2026-11-01",
+      "pm25": 76.01,
+      "aqi": 165,
+      "category": "Unhealthy",
+      "risk": "High",
+      "colour": "red",
+      "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
+    },
+    {
+      "date": "2026-11-02",
+      "pm25": 77.04,
+      "aqi": 166,
+      "category": "Unhealthy",
+      "risk": "High",
+      "colour": "red",
+      "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
+    },
+    {
+      "date": "2026-11-03",
+      "pm25": 84.91,
+      "aqi": 172,
+      "category": "Unhealthy",
+      "risk": "High",
+      "colour": "red",
+      "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
+    }
+  ]
+}
