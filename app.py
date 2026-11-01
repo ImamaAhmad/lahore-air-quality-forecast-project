@@ -1,9 +1,8 @@
-﻿import json
+import json
 from pathlib import Path
 from datetime import datetime
 
 import streamlit as st
-from streamlit_autorefresh import st_autorefresh
 import pandas as pd
 import plotly.graph_objects as go
 
@@ -11,7 +10,7 @@ from forecast_engine import generate_forecast, aqi_details, FORECAST_FILE
 
 st.set_page_config(
     page_title="Lahore Air Forecast",
-    page_icon="🌫️",
+    page_icon="???",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -271,18 +270,7 @@ page = st.radio(
     label_visibility="collapsed"
 )
 
-# Automatically refresh the dashboard every 5 minutes
-st_autorefresh(
-    interval=5 * 60 * 1000,
-    key="dashboard_refresh"
-)
-
-
-# Automatically rerun the app every 15 minutes
-st_autorefresh(
-    interval=15 * 60 * 1000,
-    key="lahore_forecast_auto_refresh"
-)
+# Automatically refresh dashboard using Streamlit native fragment
 
 st.markdown("---")
 
@@ -341,7 +329,7 @@ if page == "Home":
 
         st.markdown(
             f"""<div class="updated">
-            ◷ LAST UPDATED:
+            ? LAST UPDATED:
             <b>{updated.strftime('%d %B %Y · %I:%M %p PKT')}</b>
             &nbsp; | &nbsp;
             NEXT UPDATE:
@@ -377,7 +365,7 @@ if page == "Home":
             <p><b>Smog risk:</b> {risk}</p>
             <p>{advice}</p>
             <p class="small-label">
-                PM₂.₅ CONCENTRATION: {today['pm25']} µg/m³
+                PM2.5 CONCENTRATION: {today['pm25']} µg/m³
             </p>
         </div>
         """, unsafe_allow_html=True)
@@ -408,7 +396,7 @@ if page == "Home":
                     <b>{category}</b>
                     <p>Smog risk: {risk}</p>
                     <p class="small-label">
-                    PM₂.₅: {item['pm25']} µg/m³
+                    PM2.5: {item['pm25']} µg/m³
                     </p>
                     <p>{advice}</p>
                 </div>
@@ -478,7 +466,7 @@ elif page == "Learn More":
     how clean or polluted the air is. Higher AQI values represent poorer
     air quality and greater potential health risks. AQI is calculated
     using concentrations of common air pollutants, including particulate
-    matter (PM₂.₅ and PM₁₀), ozone, nitrogen dioxide, sulfur dioxide,
+    matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide,
     and carbon monoxide.
     """)
 
@@ -495,9 +483,9 @@ elif page == "Learn More":
         reducing visibility and increasing health risks.
         """)
 
-    with st.expander("What is PM₂.₅?"):
+    with st.expander("What is PM2.5?"):
         st.write("""
-        PM₂.₅ refers to tiny airborne particles with a diameter of
+        PM2.5 refers to tiny airborne particles with a diameter of
         2.5 micrometers or smaller. These particles are small enough to
         travel deep into the lungs and may even enter the bloodstream,
         increasing the risk of respiratory and cardiovascular diseases.
@@ -573,7 +561,7 @@ elif page == "Learn More":
     Lahore frequently ranks among the world's most polluted cities,
     especially during the winter smog season. According to the World
     Air Quality Report 2024 by IQAir, Lahore recorded an annual average
-    PM₂.₅ concentration of approximately 102 µg/m³, more than 20 times
+    PM2.5 concentration of approximately 102 µg/m³, more than 20 times
     higher than the WHO annual guideline of 5 µg/m³.
     """)
 
@@ -617,7 +605,7 @@ elif page == "Feedback":
         "viewform?usp=header"
     )
 
-    st.link_button("Share your feedback ↗", feedback_url)
+    st.link_button("Share your feedback ?", feedback_url)
 
     st.components.v1.iframe(
         "https://docs.google.com/forms/d/e/"
@@ -642,7 +630,7 @@ elif page == "Project":
 
     st.write("""
     This project was developed to demonstrate how machine learning can
-    be applied to air quality forecasting. By combining historical PM₂.₅
+    be applied to air quality forecasting. By combining historical PM2.5
     measurements with weather data from Lahore, Pakistan, the system
     predicts air quality for the next three days and presents the results
     through an interactive web dashboard.
@@ -654,7 +642,7 @@ elif page == "Project":
     )
 
     st.markdown("""
-    - Predict PM₂.₅ concentrations for the next three days.
+    - Predict PM2.5 concentrations for the next three days.
     - Convert predictions into AQI values.
     - Provide understandable health recommendations.
     - Raise public awareness of air pollution in Lahore.
@@ -669,13 +657,13 @@ elif page == "Project":
     st.write("""
     The forecasting system uses a Random Forest Regressor trained on
     historical air quality and weather data. The model predicts future
-    PM₂.₅ concentrations using five input features before converting
+    PM2.5 concentrations using five input features before converting
     the results into AQI categories.
     """)
 
     st.markdown("""
     **Features used**
-    - PM₂.₅
+    - PM2.5
     - Temperature
     - Relative Humidity
     - Wind Speed
@@ -832,7 +820,7 @@ elif page == "GitHub":
     """)
 
     st.link_button(
-        "Explore the GitHub repository ↗",
+        "Explore the GitHub repository ?",
         "https://github.com/ImamaAhmad/lahore-air-quality-forecast-project/tree/main"
     )
 
@@ -848,4 +836,3 @@ Breathe aware · Live informed
 © 2026 by Imama Ahmad
 </div>
 """, unsafe_allow_html=True)
-
