@@ -1,30 +1,30 @@
 {
   "city": "Lahore",
-  "last_updated": "2026-11-03T18:39:52.784873+05:00",
-  "next_update": "2026-11-06T18:39:52.784873+05:00",
+  "last_updated": "2026-11-06T18:46:02.337995+05:00",
+  "next_update": "2026-11-09T18:46:02.337995+05:00",
   "forecasts": [
     {
-      "date": "2026-11-04",
-      "pm25": 86.04,
-      "aqi": 172,
+      "date": "2026-11-07",
+      "pm25": 55.05,
+      "aqi": 149,
+      "category": "Unhealthy for Sensitive Groups",
+      "risk": "High",
+      "colour": "orange",
+      "advice": "Sensitive groups should limit outdoor activity, keep medication available if needed, and monitor symptoms."
+    },
+    {
+      "date": "2026-11-08",
+      "pm25": 63.12,
+      "aqi": 156,
       "category": "Unhealthy",
       "risk": "High",
       "colour": "red",
       "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
     },
     {
-      "date": "2026-11-05",
-      "pm25": 90.91,
-      "aqi": 176,
-      "category": "Unhealthy",
-      "risk": "High",
-      "colour": "red",
-      "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
-    },
-    {
-      "date": "2026-11-06",
-      "pm25": 75.82,
-      "aqi": 165,
+      "date": "2026-11-09",
+      "pm25": 65.85,
+      "aqi": 158,
       "category": "Unhealthy",
       "risk": "High",
       "colour": "red",
