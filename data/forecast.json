@@ -1,34 +1,34 @@
 {
   "city": "Lahore",
-  "last_updated": "2026-11-06T18:46:02.337995+05:00",
-  "next_update": "2026-11-09T18:46:02.337995+05:00",
+  "last_updated": "2026-11-09T20:13:44.828370+05:00",
+  "next_update": "2026-11-12T20:13:44.828370+05:00",
   "forecasts": [
     {
-      "date": "2026-11-07",
-      "pm25": 55.05,
-      "aqi": 149,
-      "category": "Unhealthy for Sensitive Groups",
-      "risk": "High",
-      "colour": "orange",
-      "advice": "Sensitive groups should limit outdoor activity, keep medication available if needed, and monitor symptoms."
+      "date": "2026-11-10",
+      "pm25": 144.85,
+      "aqi": 220,
+      "category": "Very Unhealthy",
+      "risk": "Very High",
+      "colour": "purple",
+      "advice": "Stay indoors where possible, keep windows and doors closed, use an air purifier if available, and avoid unnecessary outdoor activities."
     },
     {
-      "date": "2026-11-08",
-      "pm25": 63.12,
-      "aqi": 156,
-      "category": "Unhealthy",
-      "risk": "High",
-      "colour": "red",
-      "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
+      "date": "2026-11-11",
+      "pm25": 197.61,
+      "aqi": 272,
+      "category": "Very Unhealthy",
+      "risk": "Very High",
+      "colour": "purple",
+      "advice": "Stay indoors where possible, keep windows and doors closed, use an air purifier if available, and avoid unnecessary outdoor activities."
     },
     {
-      "date": "2026-11-09",
-      "pm25": 65.85,
-      "aqi": 158,
-      "category": "Unhealthy",
-      "risk": "High",
-      "colour": "red",
-      "advice": "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."
+      "date": "2026-11-12",
+      "pm25": 197.08,
+      "aqi": 272,
+      "category": "Very Unhealthy",
+      "risk": "Very High",
+      "colour": "purple",
+      "advice": "Stay indoors where possible, keep windows and doors closed, use an air purifier if available, and avoid unnecessary outdoor activities."
     }
   ]
 }
