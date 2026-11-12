@@ -1,4 +1,4 @@
-import json
+﻿import json
 from pathlib import Path
 from datetime import datetime
 
@@ -10,7 +10,7 @@ from forecast_engine import generate_forecast, aqi_details, FORECAST_FILE
 
 st.set_page_config(
     page_title="Lahore Air Forecast",
-    page_icon="???",
+    page_icon="🌿",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -19,13 +19,6 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
 
-:root {
-    --cream: #F5F1E8;
-    --green: #243D35;
-    --sage: #A8BBA5;
-    --rose: #D9A6A0;
-}
-
 .stApp {
     background: #F5F1E8;
     color: #243D35;
@@ -33,15 +26,10 @@ st.markdown("""
 }
 
 header[data-testid="stHeader"] {
-    background: #F5F1E8 !important;
-    height: 0 !important;
+    background: #F5F1E8;
 }
 
-[data-testid="stToolbar"] {
-    visibility: hidden;
-}
-
-#MainMenu, footer {
+[data-testid="stToolbar"], #MainMenu, footer {
     visibility: hidden;
 }
 
@@ -51,7 +39,7 @@ header[data-testid="stHeader"] {
 
 .block-container {
     max-width: 1320px;
-    padding-top: 1.2rem;
+    padding-top: 3.5rem !important;
     padding-bottom: 3rem;
 }
 
@@ -65,17 +53,15 @@ p, li, label {
 }
 
 .hero {
-    background: linear-gradient(120deg, #263F36, #49685A);
+    background: linear-gradient(120deg,#263F36,#49685A);
     border-radius: 28px;
     padding: 55px 48px;
-    color: #F5F1E8;
-    margin-bottom: 25px;
-    overflow: hidden;
+    margin: 25px 0;
 }
 
 .hero h1 {
     color: #F8F3E8 !important;
-    font-size: clamp(38px, 6vw, 68px);
+    font-size: clamp(38px,6vw,68px);
     line-height: 1.1;
 }
 
@@ -94,10 +80,10 @@ p, li, label {
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display',serif;
     font-size: 30px;
     color: #243D35;
-    margin: 25px 0 12px 0;
+    margin: 25px 0 12px;
 }
 
 .card, .forecast-card {
@@ -114,10 +100,9 @@ p, li, label {
 }
 
 .aqi-number {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display',serif;
     font-size: 55px;
     font-weight: 700;
-    line-height: 1.2;
 }
 
 .small-label {
@@ -132,13 +117,13 @@ p, li, label {
     color: #52645A;
     border-radius: 12px;
     padding: 12px 16px;
+    margin: 15px 0 22px;
     font-size: 13px;
-    margin: 15px 0 22px 0;
 }
 
 .stButton button, .stLinkButton a {
     background: #243D35 !important;
-    color: #FFFFFF !important;
+    color: white !important;
     border: none !important;
     border-radius: 12px !important;
     padding: 10px 22px !important;
@@ -169,21 +154,44 @@ hr {
 
 .footer strong {
     color: #243D35;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display',serif;
     font-size: 22px;
 }
 
+[data-testid="stRadio"] > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+    border-bottom: 1px solid #D9DFD3;
+    padding: 12px 0 0;
+}
+
+[data-testid="stRadio"] label p {
+    color: #65786C;
+    font-size: 14px;
+}
+
+[data-testid="stRadio"] label:has(input:checked) p {
+    color: #243D35 !important;
+    font-weight: 700;
+}
+
+[data-testid="stRadio"] input {
+    display: none;
+}
+
 @media(max-width:700px) {
-    .hero { padding: 32px 23px; }
+    .hero {
+        padding: 32px 23px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
 
-
-
 st.markdown("""
 <div style="font-family:Playfair Display,serif;
-font-size:30px;font-weight:700;color:#243D35;padding-top:8px;">
+font-size:30px;font-weight:700;color:#243D35;">
 Lahore Air Forecast
 <div style="font-family:DM Sans,sans-serif;font-size:10px;
 letter-spacing:3px;color:#8A9D88;text-transform:uppercase;">
@@ -191,90 +199,23 @@ Breathe aware · Live informed
 </div></div>
 """, unsafe_allow_html=True)
 
-
-st.markdown("""
-<style>
-
-/* Elegant horizontal navigation */
-
-[data-testid="stRadio"] > div {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    gap: 32px !important;
-    border-bottom: 1px solid #D9DFD3;
-    padding: 12px 0 0 0;
-    width: 100% !important;
-}
-
-[data-testid="stRadio"] label {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    padding: 10px 0 14px 0 !important;
-    margin: 0 !important;
-    flex: 0 0 auto !important;
-    position: relative;
-}
-
-[data-testid="stRadio"] label p {
-    color: #65786C !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    white-space: nowrap !important;
-}
-
-[data-testid="stRadio"] label:has(input:checked) {
-    background: transparent !important;
-}
-
-[data-testid="stRadio"] label:has(input:checked) p {
-    color: #243D35 !important;
-    font-weight: 700 !important;
-}
-
-[data-testid="stRadio"] label:has(input:checked)::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: #A8BBA5;
-    border-radius: 5px 5px 0 0;
-}
-
-[data-testid="stRadio"] input {
-    display: none !important;
-}
-
-@media(max-width: 750px) {
-    [data-testid="stRadio"] > div {
-        gap: 16px !important;
-        flex-wrap: wrap !important;
-    }
-
-    [data-testid="stRadio"] label p {
-        font-size: 12px !important;
-    }
-}
-
-</style>
-""", unsafe_allow_html=True)
-
 page = st.radio(
     "Navigation",
-    ["Home", "Learn More", "Feedback", "Project", "Analytics", "GitHub"],
+    ["Home","Learn More","Feedback","Project","Analytics","GitHub"],
     horizontal=True,
     label_visibility="collapsed"
 )
 
-# Automatically refresh dashboard using Streamlit native fragment
-
 st.markdown("---")
 
-
+COLOURS = {
+    "green":"#319B76",
+    "yellow":"#D3A92E",
+    "orange":"#E88B43",
+    "red":"#D94E55",
+    "purple":"#9065B5",
+    "black":"#45494D"
+}
 
 def hero(title, subtitle, eyebrow="AIR QUALITY • LAHORE, PAKISTAN"):
     st.markdown(f"""
@@ -285,16 +226,6 @@ def hero(title, subtitle, eyebrow="AIR QUALITY • LAHORE, PAKISTAN"):
     </div>
     """, unsafe_allow_html=True)
 
-
-COLOURS = {
-    "green": "#319B76",
-    "yellow": "#D3A92E",
-    "orange": "#E88B43",
-    "red": "#D94E55",
-    "purple": "#9065B5",
-    "black": "#45494D"
-}
-
 def get_forecast():
     if FORECAST_FILE.exists():
         return json.loads(
@@ -302,6 +233,7 @@ def get_forecast():
         )
     return None
 
+# ---------------- HOME ----------------
 
 if page == "Home":
 
@@ -317,7 +249,7 @@ if page == "Home":
 
         if st.button("Generate first forecast"):
             try:
-                with st.spinner("Generating your Lahore forecast..."):
+                with st.spinner("Generating forecast..."):
                     generate_forecast(force=True)
                 st.rerun()
             except Exception as e:
@@ -327,21 +259,19 @@ if page == "Home":
         updated = datetime.fromisoformat(data["last_updated"])
         next_update = datetime.fromisoformat(data["next_update"])
 
-        st.markdown(
-            f"""<div class="updated">
-            ? LAST UPDATED:
-            <b>{updated.strftime('%d %B %Y · %I:%M %p PKT')}</b>
-            &nbsp; | &nbsp;
-            NEXT UPDATE:
-            <b>{next_update.strftime('%d %B %Y · %I:%M %p PKT')}</b>
-            </div>""",
-            unsafe_allow_html=True
-        )
+        st.markdown(f"""
+        <div class="updated">
+        LAST UPDATED:
+        <b>{updated.strftime('%d %B %Y · %I:%M %p PKT')}</b>
+        &nbsp; | &nbsp;
+        NEXT UPDATE:
+        <b>{next_update.strftime('%d %B %Y · %I:%M %p PKT')}</b>
+        </div>
+        """, unsafe_allow_html=True)
 
         st.caption(
             "Experimental machine learning predictions. "
-            "These are not official real-time AQI measurements "
-            "and may differ from actual air quality."
+            "These are not official real-time AQI measurements."
         )
 
         forecasts = data["forecasts"]
@@ -369,7 +299,6 @@ if page == "Home":
             </p>
         </div>
         """, unsafe_allow_html=True)
-
 
         st.markdown(
             '<div class="section-title">The days ahead</div>',
@@ -429,7 +358,6 @@ if page == "Home":
 
         st.plotly_chart(fig, use_container_width=True)
 
-
         if st.button("Refresh forecast now"):
             try:
                 with st.spinner("Updating forecast..."):
@@ -440,15 +368,28 @@ if page == "Home":
 
     st.markdown("""
     <div class="card">
-    <div class="small-label">WHY IT MATTERS</div>
-    <h2>Know your air. Protect your day.</h2>
-    Lahore experiences significant air pollution, particularly during
-    winter. Checking air quality before outdoor activities can help
-    you make more informed decisions.
+        <div class="small-label">WHY IT MATTERS</div>
+        <h2> </h2>
+        <p>Lahore experiences significant air pollution,
+        particularly during winter. Checking air quality before
+        outdoor activities can help you make informed decisions.</p>
     </div>
     """, unsafe_allow_html=True)
 
+# ---------------- LEARN MORE ----------------
 
+
+    st.markdown("""
+    <div class="card">
+        <div class="small-label">LAHORE AIR QUALITY</div>
+        <h2>Lahore's Air Quality Outlook</h2>
+        <p>
+        Lahore experiences significant air pollution, particularly
+        during winter. Checking air quality before outdoor activities
+        can help you make more informed decisions.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 elif page == "Learn More":
 
     hero(
@@ -456,65 +397,38 @@ elif page == "Learn More":
         "A little knowledge about the air can make a meaningful difference to your everyday health."
     )
 
-    st.markdown(
-        '<div class="section-title">What is AQI?</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">What is AQI?</div>', unsafe_allow_html=True)
 
     st.write("""
     The Air Quality Index (AQI) is a standardized scale used to indicate
     how clean or polluted the air is. Higher AQI values represent poorer
-    air quality and greater potential health risks. AQI is calculated
-    using concentrations of common air pollutants, including particulate
-    matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide,
-    and carbon monoxide.
+    air quality and greater potential health risks.
     """)
 
-    st.markdown(
-        '<div class="section-title">Other important terms</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Other important terms</div>', unsafe_allow_html=True)
 
     with st.expander("What is Smog?"):
         st.write("""
         Smog is a type of air pollution caused by fine particles, smoke,
-        dust, and harmful gases from vehicles, industries, and other sources.
-        In winter, these pollutants can become trapped near the ground,
-        reducing visibility and increasing health risks.
+        dust and harmful gases. In winter, these pollutants can become
+        trapped near the ground.
         """)
 
     with st.expander("What is PM2.5?"):
         st.write("""
         PM2.5 refers to tiny airborne particles with a diameter of
-        2.5 micrometers or smaller. These particles are small enough to
-        travel deep into the lungs and may even enter the bloodstream,
-        increasing the risk of respiratory and cardiovascular diseases.
+        2.5 micrometers or smaller. They can travel deep into the lungs.
         """)
 
-
-    st.markdown(
-        '<div class="section-title">AQI Forecast Key</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">AQI Forecast Key</div>', unsafe_allow_html=True)
 
     bands = [
-        ("Good", "0–50", "#319B76",
-         "Enjoy outdoor activities as normal. No special precautions are needed."),
-
-        ("Moderate", "51–100", "#D3A92E",
-         "Sensitive individuals should reduce prolonged or intense outdoor activity if symptoms occur."),
-
-        ("Unhealthy for Sensitive Groups", "101–150", "#E88B43",
-         "Sensitive groups should limit outdoor activity, keep medication available if needed, and monitor symptoms."),
-
-        ("Unhealthy", "151–200", "#D94E55",
-         "Reduce prolonged outdoor activities, avoid strenuous exercise outdoors, and consider wearing a well-fitting N95 mask if spending extended time outside."),
-
-        ("Very Unhealthy", "201–300", "#9065B5",
-         "Stay indoors where possible, keep windows and doors closed, use an air purifier if available, and avoid unnecessary outdoor activities."),
-
-        ("Hazardous", "301–500+", "#45494D",
-         "Avoid outdoor activities unless absolutely necessary. Wear a high-quality mask if you must go outside and follow official public health advisories.")
+        ("Good","0–50","#319B76","Enjoy outdoor activities as normal."),
+        ("Moderate","51–100","#D3A92E","Sensitive individuals should monitor symptoms."),
+        ("Unhealthy for Sensitive Groups","101–150","#E88B43","Sensitive groups should limit outdoor activity."),
+        ("Unhealthy","151–200","#D94E55","Reduce prolonged outdoor activities."),
+        ("Very Unhealthy","201–300","#9065B5","Stay indoors where possible."),
+        ("Hazardous","301–500+","#45494D","Avoid outdoor activities unless necessary.")
     ]
 
     for name, value, colour, advice in bands:
@@ -526,58 +440,35 @@ elif page == "Learn More":
         </div>
         """, unsafe_allow_html=True)
 
-    st.markdown(
-        '<div class="section-title">How to protect yourself</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">How to protect yourself</div>', unsafe_allow_html=True)
 
     st.markdown("""
     - Wear an N95 mask during heavy smog.
     - Limit outdoor activities when AQI is high.
     - Use an indoor air purifier if available.
-    - Follow daily AQI forecasts before planning outdoor activities.
+    - Check air quality before outdoor activities.
     """)
 
-    st.markdown(
-        '<div class="section-title">Health effects</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Health effects</div>', unsafe_allow_html=True)
 
     st.markdown("""
     - Eye irritation
     - Coughing
     - Difficulty breathing
     - Asthma attacks
-    - Heart and cardiovascular problems
-    - Higher health risks for children, older adults, and people with existing medical conditions.
+    - Cardiovascular health risks
     """)
 
-    st.markdown(
-        '<div class="section-title">Lahore’s air quality</div>',
-        unsafe_allow_html=True
-    )
-
-    st.write("""
-    Lahore frequently ranks among the world's most polluted cities,
-    especially during the winter smog season. According to the World
-    Air Quality Report 2024 by IQAir, Lahore recorded an annual average
-    PM2.5 concentration of approximately 102 µg/m³, more than 20 times
-    higher than the WHO annual guideline of 5 µg/m³.
-    """)
-
-    st.markdown(
-        '<div class="section-title">References</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">References</div>', unsafe_allow_html=True)
 
     st.markdown("""
     - [U.S. EPA – AQI](https://www.airnow.gov/aqi/)
-    - [U.S. EPA – AQI Basics](https://www.airnow.gov/aqi/aqi-basics/)
     - [WHO – Ambient Air Pollution](https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-pollution)
     - [OpenAQ](https://openaq.org/)
     - [Open-Meteo](https://open-meteo.com/)
     """)
 
+# ---------------- FEEDBACK ----------------
 
 elif page == "Feedback":
 
@@ -587,16 +478,11 @@ elif page == "Feedback":
         "FEEDBACK & COMMUNITY"
     )
 
-    st.markdown(
-        '<div class="section-title">Give your feedback</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Give your feedback</div>', unsafe_allow_html=True)
 
     st.write("""
-    This section is dedicated to collecting feedback about the website
-    and its air quality forecasting features. Suggestions, observations,
-    and ideas can help improve how information is presented and make
-    the platform more effective for users.
+    Suggestions, observations and ideas can help improve how
+    information is presented and make the platform more useful.
     """)
 
     feedback_url = (
@@ -605,7 +491,7 @@ elif page == "Feedback":
         "viewform?usp=header"
     )
 
-    st.link_button("Share your feedback ?", feedback_url)
+    st.link_button("Share your feedback", feedback_url)
 
     st.components.v1.iframe(
         "https://docs.google.com/forms/d/e/"
@@ -615,6 +501,7 @@ elif page == "Feedback":
         scrolling=True
     )
 
+# ---------------- PROJECT ----------------
 
 elif page == "Project":
 
@@ -623,42 +510,28 @@ elif page == "Project":
         "A machine learning project exploring how data can help us understand Lahore's air."
     )
 
-    st.markdown(
-        '<div class="section-title">About this project</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">About this project</div>', unsafe_allow_html=True)
 
     st.write("""
-    This project was developed to demonstrate how machine learning can
-    be applied to air quality forecasting. By combining historical PM2.5
-    measurements with weather data from Lahore, Pakistan, the system
-    predicts air quality for the next three days and presents the results
-    through an interactive web dashboard.
+    This project demonstrates how machine learning can be applied to
+    air quality forecasting. Historical PM2.5 measurements and weather
+    information are used to predict air quality for the next three days.
     """)
 
-    st.markdown(
-        '<div class="section-title">Objectives</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Objectives</div>', unsafe_allow_html=True)
 
     st.markdown("""
     - Predict PM2.5 concentrations for the next three days.
     - Convert predictions into AQI values.
     - Provide understandable health recommendations.
     - Raise public awareness of air pollution in Lahore.
-    - Demonstrate the practical application of machine learning in environmental monitoring.
     """)
 
-    st.markdown(
-        '<div class="section-title">Machine learning model</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Machine learning model</div>', unsafe_allow_html=True)
 
     st.write("""
-    The forecasting system uses a Random Forest Regressor trained on
-    historical air quality and weather data. The model predicts future
-    PM2.5 concentrations using five input features before converting
-    the results into AQI categories.
+    The forecasting system uses three trained models to predict
+    PM2.5 concentrations for three forecast days.
     """)
 
     st.markdown("""
@@ -670,11 +543,7 @@ elif page == "Project":
     - Wind Direction
     """)
 
-
-    st.markdown(
-        '<div class="section-title">Technologies used</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Technologies used</div>', unsafe_allow_html=True)
 
     st.markdown("""
     - Python
@@ -685,36 +554,25 @@ elif page == "Project":
     - Matplotlib
     - Joblib
     - Streamlit
-    - Kaggle
     """)
 
-    st.info(
-        "The dataset downloaded from Kaggle for this project "
-        "has been taken down by its owner and is no longer available."
-    )
-
-    st.markdown(
-        '<div class="section-title">Future improvements</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Future improvements</div>', unsafe_allow_html=True)
 
     st.markdown("""
-    - Predict more than three days ahead.
-    - Improve prediction accuracy using more advanced models.
+    - Extend forecast horizons.
+    - Improve prediction accuracy.
+    - Incorporate additional weather and air-quality observations.
     """)
 
-    st.markdown(
-        '<div class="section-title">Limitations</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Limitations</div>', unsafe_allow_html=True)
 
     st.write("""
-    Forecast accuracy is limited, with evaluation results indicating
-    that predictions may differ from actual PM2.5 levels, particularly
-    over longer forecast horizons. The forecasting pipeline also needs
-    validation against the original training notebooks.
+    Forecast accuracy depends on the quality and availability of
+    weather and air-quality data. Predictions may differ from actual
+    PM2.5 levels.
     """)
 
+# ---------------- ANALYTICS ----------------
 
 elif page == "Analytics":
 
@@ -724,19 +582,16 @@ elif page == "Analytics":
         "WEBSITE ANALYTICS"
     )
 
-    st.caption(
-        "Historical Wix statistics supplied by the project owner. "
-        "These are not live Streamlit analytics."
-    )
+    st.caption("Historical Wix statistics. These are not live Streamlit analytics.")
 
     cols = st.columns(5)
 
     metrics = [
-        ("Page views", "143"),
-        ("Site sessions", "82"),
-        ("Unique visitors", "59"),
-        ("Bounce rate", "62%"),
-        ("Avg. duration", "2m 1s")
+        ("Page views","143"),
+        ("Site sessions","82"),
+        ("Unique visitors","59"),
+        ("Bounce rate","62%"),
+        ("Avg. duration","2m 1s")
     ]
 
     for col, (label, value) in zip(cols, metrics):
@@ -776,10 +631,7 @@ elif page == "Analytics":
         "Unique visitors", "Bounce rate", "Avg. session duration"
     ])
 
-    st.markdown(
-        '<div class="section-title">Historical visitor activity</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Historical visitor activity</div>', unsafe_allow_html=True)
 
     st.dataframe(df, use_container_width=True, hide_index=True)
 
@@ -798,6 +650,7 @@ elif page == "Analytics":
 
     st.plotly_chart(fig, use_container_width=True)
 
+# ---------------- GITHUB ----------------
 
 elif page == "GitHub":
 
@@ -806,24 +659,20 @@ elif page == "GitHub":
         "Explore the code, notebooks and machine learning work behind Lahore Air Forecast."
     )
 
-    st.markdown(
-        '<div class="section-title">Explore the repository</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">Explore the repository</div>', unsafe_allow_html=True)
 
     st.write("""
-    The complete source code for this project is available on GitHub!
-    The repository includes machine learning models, data preprocessing,
-    model training and evaluation notebooks, datasets, and the website
-    implementation. It is provided to promote transparency, allow others
-    to understand the project, and support future improvements or contributions.
+    The project repository includes machine learning models,
+    data preprocessing, training and evaluation notebooks,
+    datasets and the website implementation.
     """)
 
     st.link_button(
-        "Explore the GitHub repository ?",
+        "Explore the GitHub repository",
         "https://github.com/ImamaAhmad/lahore-air-quality-forecast-project/tree/main"
     )
 
+# ---------------- FOOTER ----------------
 
 st.markdown("---")
 
@@ -836,3 +685,8 @@ Breathe aware · Live informed
 © 2026 by Imama Ahmad
 </div>
 """, unsafe_allow_html=True)
+
+
+
+
+
